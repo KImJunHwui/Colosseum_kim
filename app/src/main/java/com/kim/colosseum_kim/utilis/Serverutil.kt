@@ -11,7 +11,7 @@ class Serverutil {
 companion object{
 
     interface  JsonReponseHandler{
-        fun onResponse(jsonObject: JSONObject)
+        fun onResponse(jsonObj: JSONObject)
 
     }
 

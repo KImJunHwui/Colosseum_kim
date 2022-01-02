@@ -10,12 +10,17 @@ class Serverutil {
 
 companion object{
 
+    interface  JsonReponseHandler{
+        fun onResponse(jsonObject: JSONObject)
+
+    }
+
 //    모든 기능의 기본이 되는 주소.
     val BASE_URL = "http://54.180.52.26"
 
 //    로그인 하는 기능
 
-    fun postRequestLogin(email : String, pw : String){
+    fun postRequestLogin(email : String, pw : String, handler: JsonReponseHandler?){
 
 //        서버에 입력받은 email, pw 전달 => 로그인 기능 POST/user => 요청 (Request) 실행
 //        라이브러리(okHttp) 활용해 보자
@@ -62,6 +67,11 @@ companion object{
                 val jsonObj = JSONObject(bodyString)
 
                 Log.d("응답본문",jsonObj.toString())
+
+//                handler 변수가 null이 아니라면,실체가 있다면
+//                그 내부에 적힌 내용 실행
+
+                handler?.onResponse(jsonObj)
             }
 
 
